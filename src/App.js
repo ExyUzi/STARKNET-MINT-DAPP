@@ -21,16 +21,15 @@ function App() {
   const [account, setAccount] = useState();
 
   const connectWallet = async () => {
-    const windowStarknet = await connect({
-      include: ["argentX"],
-    })
-    
+    // Using connect function from @argent/get-starknet to connect our Argent X wallet to our DAPP
+    const windowStarknet = await connect()
     await windowStarknet?.enable({ starknetVersion: "v4" })
-    setAccount(windowStarknet.account)
+    
+    setAccount(windowStarknet.account) // Set our account variable to windowStarknet.account (address, provider and the signer)
     console.log(windowStarknet.account)
-    setAddress(windowStarknet.selectedAddress)
-    setConnected(true)
-    return windowStarknet
+    setAddress(windowStarknet.selectedAddress) // Set our address variable to windowStarknet.selectedAddress
+    setConnected(true) // isConnected = true, the page will changed according to the boolean
+    return windowStarknet 
   }
 
   const mintNFT = async () => {
